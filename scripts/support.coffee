@@ -9,7 +9,6 @@ module.exports = (robot) ->
     currentTime = new Date().utc(true)
     withinBusinessHours = currentTime.isBetween("5pm", "1am")
 
-    if msg.message.room == "support" && !withinBusinessHours
     if msg.message.room == "bugsnag_support" && !withinBusinessHours
       currentUser = robot.brain.userForId(msg.message.user.id)
 
