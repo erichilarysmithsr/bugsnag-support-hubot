@@ -14,10 +14,14 @@ module.exports = (robot) ->
     if msg.message.room == "bugsnag_support" && !withinBusinessHours
       currentUser = robot.brain.userForId(msg.message.user.id)
 
-      if !currentUser.lockSupport or currentUser.lockSupport.isBefore("1 hour ago")
+      if !currentUser.lockSupport or new Date(currentUser.lockSupport).isBefore("1 hour ago")
         currentUser.lockSupport = currentTime
+        mentionName = msg.message.user.mention_name
+        userName = msg.message.user.name
 
-        msg.send "Hey #{"@" + msg.message.user.mention_name || msg.message.user.name}! Thanks for stopping by. Unfortunately, it looks like it's outside of business hours in San Francisco, so a human may not respond right now."
+        name = if mentionName isnt undefined then "@" + mentionName else userName
+
+        msg.send "Hey #{name}! Thanks for stopping by. Unfortunately, it looks like it's outside of business hours in San Francisco, so a human may not respond right now."
 
         setTimeout (->
           msg.send "Feel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-6pm PST."
