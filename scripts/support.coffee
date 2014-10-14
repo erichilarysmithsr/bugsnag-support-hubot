@@ -7,11 +7,12 @@ module.exports = (robot) ->
 
   robot.hear regex, (msg) ->
     currentTime = new Date().utc(true)
-    withinBusinessHours = currentTime.isBetween("5pm", "1am tomorrow")
+    startOfBusinessDay = Date.utc.past("5pm")
+    endOfBusinessDay = startOfBusinessDay.addHours(8)
+    withinBusinessHours = currentTime.isBetween(startOfBusinessDay, endOfBusinessDay)
 
     if msg.message.room == "bugsnag_support" && !withinBusinessHours
       currentUser = robot.brain.userForId(msg.message.user.id)
-
 
       if !currentUser.lockSupport or currentUser.lockSupport.isBefore("1 hour ago")
         currentUser.lockSupport = currentTime
