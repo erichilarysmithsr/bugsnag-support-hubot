@@ -13,7 +13,7 @@ module.exports = (robot) ->
     employeeNames = ["Jessica Dillon", "Simon Maynard", "Conrad Irwin", "James Smith", "Kristine Pinedo", "Max Luster"]
     notAnEmployee = employeeNames.indexOf(msg.message.user.name) == -1
 
-    if msg.message.room == "bugsnag_hubot_development" && !withinBusinessHours && notAnEmployee
+    if msg.message.room == "bugsnag_support" && !withinBusinessHours && notAnEmployee
       currentUser = robot.brain.userForId(msg.message.user.id)
 
       if !currentUser.lockSupport or new Date(currentUser.lockSupport).isBefore("1 hour ago")
