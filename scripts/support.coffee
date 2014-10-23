@@ -1,6 +1,7 @@
 require "sugar"
-# Any time a NEW person (aka a person Hubot hasn't responded to) enters
-# the room outside of 10am-6pm PST and says something, Hubot should respond
+# Any time a NEW person (aka a person Hubot hasn't responded to that isn't
+# an employee) enters the room outside of 10am-7pm PST and says something,
+# Hubot should respond with an OOO response
 
 module.exports = (robot) ->
   regex = /.*/m
