@@ -10,10 +10,8 @@ module.exports = (robot) ->
     startOfBusinessDay = Date.utc.past("5pm")
     endOfBusinessDay = Date.utc.past("5pm").addHours(8)
     withinBusinessHours = currentTime.isBetween(startOfBusinessDay, endOfBusinessDay)
-    employeeNames = ["Jessica Dillon", "Simon Maynard", "Conrad Irwin", "James Smith", "Kristine Pinedo", "Max Luster"]
-    notAnEmployee = employeeNames.indexOf(msg.message.user.name) == -1
 
-    if msg.message.room == "bugsnag_support" && !withinBusinessHours && notAnEmployee
+    if msg.message.room == "bugsnag_support" && !withinBusinessHours && !msg.message.user.jid?
       currentUser = robot.brain.userForId(msg.message.user.id)
 
       if !currentUser.lockSupport or new Date(currentUser.lockSupport).isBefore("1 hour ago")
