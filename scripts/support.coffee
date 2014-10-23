@@ -8,12 +8,12 @@ module.exports = (robot) ->
   robot.hear regex, (msg) ->
     currentTime = new Date().utc(true)
     startOfBusinessDay = Date.utc.past("5pm")
-    endOfBusinessDay = Date.utc.past("5pm").addHours(8)
+    endOfBusinessDay = Date.utc.past("5pm").addHours(9)
     withinBusinessHours = currentTime.isBetween(startOfBusinessDay, endOfBusinessDay)
 
     msg.send "It is #{currentTime}. It is #{if withinBusinessHours is false then 'not' else ''} within business hours. Business hours are from #{startOfBusinessDay} to #{endOfBusinessDay}."
 
-    if msg.message.room == "bugsnag_support" && !withinBusinessHours
+    if msg.message.room == "bugsnag_hubot_development" && !withinBusinessHours
       currentUser = robot.brain.userForId(msg.message.user.id)
 
       if !currentUser.lockSupport or new Date(currentUser.lockSupport).isBefore("1 hour ago")
@@ -26,7 +26,7 @@ module.exports = (robot) ->
         msg.send "Hey #{name}! Thanks for stopping by. Unfortunately, it looks like it's outside of business hours in San Francisco, so a human may not respond right now."
 
         setTimeout (->
-          msg.send "Feel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-6pm PST."
+          msg.send "Feel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-7pm PST."
         ), 100
 
         setTimeout (->
