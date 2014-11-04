@@ -8,8 +8,8 @@ module.exports = (robot) ->
 
   robot.hear regex, (msg) ->
     currentTime = new Date().utc(true)
-    startOfBusinessDay = Date.utc.past("5pm")
-    endOfBusinessDay = Date.utc.past("5pm").addHours(9)
+    startOfBusinessDay = Date.utc.past("6pm")
+    endOfBusinessDay = Date.utc.past("6pm").addHours(9)
     withinBusinessHours = currentTime.isBetween(startOfBusinessDay, endOfBusinessDay)
 
     if msg.message.room == "bugsnag_support" && !withinBusinessHours && !msg.message.user.jid?
