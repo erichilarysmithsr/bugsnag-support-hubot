@@ -34,9 +34,7 @@ module.exports = (robot) ->
         currentUser.lockSupport = currentTime
         mentionName = msg.message.user.mention_name
         userName = msg.message.user.name
-
         name = if mentionName isnt undefined then "@" + mentionName else userName
-
         reason = if isHoliday
           "a company holiday"
         else
