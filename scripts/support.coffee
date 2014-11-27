@@ -33,7 +33,12 @@ module.exports = (robot) ->
         userName = msg.message.user.name
 
         name = if mentionName isnt undefined then "@" + mentionName else userName
-        supportMessage = "Hey #{name}! Thanks for stopping by. Unfortunately, it looks like it's outside of business hours in San Francisco, so a human may not respond right now.\nFeel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-7pm PST.\nI'd also recommend checking out our docs page, we may have already answered your question: https://www.bugsnag.com/docs/"
+        supportMessage =
+          """
+          Hey #{name}! Thanks for stopping by. Unfortunately, it looks like it's outside of business hours in San Francisco, so a human may not respond right now.
+          Feel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-7pm PST.
+          I'd also recommend checking out our docs page, we may have already answered your question: https://www.bugsnag.com/docs/
+          """
 
         setTimeout (->
           msg.send supportMessage
