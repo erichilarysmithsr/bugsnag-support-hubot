@@ -21,7 +21,7 @@ module.exports = (robot) ->
                     "12/24/2015", "12/25/2015"]
     isHoliday = ->
       holidayDates.some (day) ->
-        formattedDate = Date.create(day).isToday()
+        Date.create(day).isToday()
 
     isGuest = !msg.message.user.jid?
     isSupportRoom = msg.message.room == "bugsnag_support"
