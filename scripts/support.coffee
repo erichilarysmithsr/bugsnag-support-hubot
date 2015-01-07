@@ -35,15 +35,14 @@ module.exports = (robot) ->
         mentionName = msg.message.user.mention_name
         userName = msg.message.user.name
         name = if mentionName isnt undefined then "@" + mentionName else userName
-        reason = if isHoliday
-          "a company holiday"
-        else
-          "outside of business hours in San Francisco"
+        reason = if isHoliday() then "a company holiday" else "outside of business hours in San Francisco"
 
         supportMessage =
           """
           Hey #{name}! Thanks for stopping by. Unfortunately, it looks like it's #{reason}, so a human may not respond right now.
+
           Feel free to send an e-mail with your questions to support@bugsnag.com in the mean time, or come back from 10am-7pm PST.
+
           I'd also recommend checking out our docs page, we may have already answered your question: https://www.bugsnag.com/docs/
           """
 
